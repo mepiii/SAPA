@@ -3,3 +3,5 @@ dist/
 .env
 CLAUDE.md
 .claudeignore
+PRD.md
+DESIGNSPEC.md
