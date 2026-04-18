@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from 'react';
+import { toast } from 'sonner';
 
 const SheetContext = createContext(null);
 
@@ -31,6 +32,19 @@ export function SheetProvider({ children }) {
     const newTrackingId = `SAPA-${id}`;
     setTrackingId(newTrackingId);
     setIsSubmitted(true);
+
+    // Premium Toast Notification
+    toast.success(`Berhasil! Laporan Anda telah diterima. Resi: ${newTrackingId}`, {
+      style: {
+        background: 'rgba(255, 255, 255, 0.7)',
+        backdropFilter: 'blur(16px)',
+        border: '1px solid rgba(255, 255, 255, 0.5)',
+        color: '#300B55',
+        boxShadow: '0 20px 50px rgba(0,0,0,0.05)',
+        fontFamily: 'Campton, Plus Jakarta Sans, sans-serif'
+      }
+    });
+
     console.log('Form submitted:', { category, formData, trackingId: newTrackingId });
     return newTrackingId;
   };

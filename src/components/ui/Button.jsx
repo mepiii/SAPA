@@ -6,7 +6,7 @@ export function Button({
   ...props
 }) {
   const variants = {
-    primary: 'bg-sapa-accent text-white hover:bg-sapa-primary',
+    primary: 'bg-sapa-accent text-white hover:bg-sapa-primary shadow-[0_10px_30px_rgba(122,71,166,0.3)] hover:-translate-y-1',
     secondary: 'bg-sapa-highlight text-sapa-primary hover:bg-sapa-accent/10',
     outline: 'border border-sapa-secondary/30 text-sapa-primary hover:bg-sapa-highlight',
     ghost: 'text-sapa-secondary hover:text-sapa-primary hover:bg-sapa-highlight',
@@ -20,7 +20,7 @@ export function Button({
 
   return (
     <button
-      className={`inline-flex items-center justify-center gap-2 font-medium rounded-lg transition-all duration-200 hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed ${variants[variant]} ${sizes[size]} ${className}`}
+      className={`inline-flex items-center justify-center gap-2 font-medium rounded-lg transition-all duration-200 hover:scale-[1.02] active:scale-95 hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed ${variants[variant]} ${sizes[size]} ${className}`}
       {...props}
     >
       {children}

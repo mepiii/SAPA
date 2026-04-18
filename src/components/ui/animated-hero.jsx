@@ -12,7 +12,6 @@ export function AnimatedHero({
   onSecondaryClick,
   className = '',
 }) {
-  // Split title into words for staggered animation
   const titleWords = title.split(' ');
   const accentWords = titleAccent ? titleAccent.split(' ') : [];
 
@@ -61,10 +60,10 @@ export function AnimatedHero({
         {badge && (
           <motion.div
             variants={itemVariants}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-sapa-highlight border border-sapa-secondary/20 mb-6"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/70 backdrop-blur-xl border border-white/50 shadow-[0_20px_50px_rgba(0,0,0,0.05)] mb-6"
           >
             <span className="w-2 h-2 rounded-full bg-sapa-accent" />
-            <span className="text-sm font-medium text-sapa-primary tracking-tight">
+            <span className="text-sm font-body font-medium text-sapa-primary tracking-tight">
               {badge}
             </span>
           </motion.div>
@@ -72,29 +71,29 @@ export function AnimatedHero({
 
         {/* Headline with staggered words */}
         <motion.h1
-          className="text-4xl md:text-5xl lg:text-6xl font-bold text-sapa-primary tracking-tight leading-tight mb-4"
+          className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-[#300B55] tracking-tight leading-[1.1] mb-6"
           variants={containerVariants}
         >
           {titleWords.map((word, i) => (
             <motion.span
               key={i}
               variants={wordVariants}
-              className="inline-block mr-2"
+              className="inline-block mr-2 md:mr-3"
             >
               {word}
             </motion.span>
           ))}
-          <br />
+          <br className="hidden sm:block" />
           {accentWords.length > 0 && (
             <motion.span
               variants={containerVariants}
-              className="text-sapa-accent inline-flex flex-wrap justify-center"
+              className="text-sapa-accent inline-flex flex-wrap justify-center mt-2"
             >
               {accentWords.map((word, i) => (
                 <motion.span
                   key={`accent-${i}`}
                   variants={wordVariants}
-                  className="inline-block mr-2"
+                  className="inline-block mr-2 md:mr-3"
                 >
                   {word}
                 </motion.span>
@@ -107,7 +106,7 @@ export function AnimatedHero({
         {subtitle && (
           <motion.p
             variants={itemVariants}
-            className="text-lg md:text-xl text-sapa-secondary max-w-xl mx-auto mb-8"
+            className="text-lg md:text-xl font-body text-sapa-secondary max-w-2xl mx-auto mb-10 leading-relaxed"
           >
             {subtitle}
           </motion.p>
@@ -122,8 +121,8 @@ export function AnimatedHero({
             {primaryCTA && (
               <motion.button
                 onClick={onPrimaryClick}
-                className="px-8 py-3 bg-sapa-accent text-white font-semibold rounded-full hover:bg-sapa-primary transition-all duration-300 hover:scale-[1.02] shadow-sm"
-                whileHover={{ scale: 1.05 }}
+                className="px-8 py-4 bg-sapa-accent text-white font-display font-semibold rounded-full hover:bg-sapa-primary transition-all duration-300 shadow-[0_10px_30px_rgba(122,71,166,0.3)] hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(122,71,166,0.4)]"
+                whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
                 {primaryCTA}
@@ -132,7 +131,7 @@ export function AnimatedHero({
             {secondaryCTA && (
               <motion.button
                 onClick={onSecondaryClick}
-                className="px-8 py-3 border border-sapa-secondary/30 text-sapa-primary font-medium rounded-full hover:bg-sapa-highlight transition-all duration-300"
+                className="px-8 py-4 border border-white/50 bg-white/70 backdrop-blur-xl text-sapa-primary font-display font-medium rounded-full hover:bg-sapa-highlight transition-physical shadow-[0_10px_30px_rgba(0,0,0,0.05)]"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
@@ -151,7 +150,7 @@ export function AnimatedHero({
         transition={{ delay: 1, duration: 0.5 }}
       >
         <div className="w-6 h-10 rounded-full border-2 border-sapa-secondary/30 flex items-start justify-center p-1 animate-bounce">
-          <div className="w-1.5 h-3 bg-sapa-secondary rounded-full animate-pulse" />
+          <div className="w-1.5 h-3 bg-sapa-secondary/60 rounded-full animate-pulse" />
         </div>
       </motion.div>
     </section>

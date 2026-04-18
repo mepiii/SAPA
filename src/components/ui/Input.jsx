@@ -12,8 +12,8 @@ export function Input({
         </label>
       )}
       <input
-        className={`px-4 py-2.5 rounded-xl border bg-white text-sapa-primary placeholder:text-sapa-secondary/60 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-sapa-accent/30 focus:border-sapa-accent ${
-          error ? 'border-red-400' : 'border-sapa-secondary/20'
+        className={`px-4 py-2.5 rounded-xl border bg-[#F9F9FB] text-sapa-primary placeholder:text-sapa-secondary/60 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-sapa-accent/30 focus:border-sapa-accent ${
+          error ? 'border-red-400' : 'border-gray-200'
         }`}
         {...props}
       />
@@ -40,8 +40,8 @@ export function Textarea({
       )}
       <textarea
         rows={rows}
-        className={`px-4 py-2.5 rounded-xl border bg-white text-sapa-primary placeholder:text-sapa-secondary/60 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-sapa-accent/30 focus:border-sapa-accent resize-none ${
-          error ? 'border-red-400' : 'border-sapa-secondary/20'
+        className={`px-4 py-2.5 rounded-xl border bg-[#F9F9FB] text-sapa-primary placeholder:text-sapa-secondary/60 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-sapa-accent/30 focus:border-sapa-accent resize-none ${
+          error ? 'border-red-400' : 'border-gray-200'
         }`}
         {...props}
       />
@@ -66,7 +66,7 @@ export function FileInput({
           {label}
         </label>
       )}
-      <label className="flex items-center justify-center gap-2 px-4 py-4 rounded-xl border-2 border-dashed border-sapa-secondary/30 bg-sapa-highlight/30 cursor-pointer hover:border-sapa-accent/50 hover:bg-sapa-highlight/50 transition-all duration-200">
+      <label className="flex items-center justify-center gap-2 px-4 py-4 rounded-xl border-2 border-dashed border-gray-200 bg-[#F9F9FB] cursor-pointer hover:border-sapa-accent/50 hover:bg-[#F0F0F5] transition-all duration-200">
         <svg
           className="w-5 h-5 text-sapa-secondary"
           fill="none"
@@ -110,7 +110,7 @@ export function Toggle({
         />
         <div
           className={`w-11 h-6 rounded-full transition-colors duration-200 ${
-            checked ? 'bg-sapa-accent' : 'bg-sapa-secondary/30'
+            checked ? 'bg-sapa-accent' : 'bg-gray-200'
           }`}
         />
         <div
