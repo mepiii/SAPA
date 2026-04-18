@@ -27,9 +27,7 @@ export default function FloatingPillNav() {
   return (
     <>
       <motion.nav
-        /* Hapus -translate-x-1/2 dari sini */
         className="fixed top-4 left-1/2 z-50"
-        /* Pindahkan logic x: "-50%" ke dalam initial dan animate */
         initial={{ opacity: 0, y: -20, x: "-50%" }}
         animate={{ opacity: 1, y: 0, x: "-50%" }}
         transition={{ duration: 0.5, ease: 'easeOut' }}
@@ -71,7 +69,7 @@ export default function FloatingPillNav() {
               >
                 BEM APPS
                 <ChevronDown
-                  size={16}
+                  width={16} height={16}
                   className={`transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`}
                 />
               </button>
@@ -102,7 +100,7 @@ export default function FloatingPillNav() {
               onClick={openTrackingModal}
               className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-sapa-primary hover:bg-sapa-highlight transition-all duration-200"
             >
-              <Search size={16} />
+              <Search width={16} height={16} />
               Cek Status
             </button>
           </div>

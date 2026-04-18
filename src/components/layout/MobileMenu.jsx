@@ -16,7 +16,7 @@ export default function MobileMenu({ isOpen, onClose }) {
           onClick={onClose}
           className="absolute top-4 right-4 p-2 text-sapa-secondary hover:text-sapa-primary transition-colors"
         >
-          <X size={24} />
+          <X width={24} height={24} />
         </button>
 
         <nav className="flex flex-col gap-4 mt-12">
@@ -76,7 +76,7 @@ export function MobileMenuButton({ onClick }) {
       className="md:hidden p-2 text-sapa-primary hover:text-sapa-accent transition-colors"
       aria-label="Open menu"
     >
-      <Menu size={24} />
+      <Menu width={24} height={24} />
     </button>
   );
 }

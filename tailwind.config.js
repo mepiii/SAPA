@@ -8,7 +8,8 @@ export default {
     extend: {
       colors: {
         sapa: {
-          canvas: '#FFFFFF',
+          canvas: '#F5F5F7',
+          surface: '#FFFFFF',
           primary: '#300B55',
           secondary: '#A7A3A3',
           accent: '#7A47A6',
@@ -18,7 +19,9 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif'],
+        sans: ['Campton', 'Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif'],
+        display: ['Request', 'Campton', 'Plus Jakarta Sans', 'sans-serif'],
+        body: ['Campton', 'Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif'],
       },
       animation: {
         'fade-up': 'fadeUp 0.6s ease-out forwards',
@@ -27,6 +30,8 @@ export default {
         'slide-out-right': 'slideOutRight 0.3s ease-out forwards',
         'nav-enter': 'navEnter 0.5s ease-out forwards',
         'gradient-shift': 'gradientShift 3s ease infinite',
+        marquee: 'marquee var(--duration) linear infinite',
+        'marquee-vertical': 'marquee-vertical var(--duration) linear infinite',
       },
       keyframes: {
         fadeUp: {
@@ -52,6 +57,14 @@ export default {
         gradientShift: {
           '0%, 100%': { backgroundPosition: '0% 50%' },
           '50%': { backgroundPosition: '100% 50%' },
+        },
+        marquee: {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(calc(-100% - var(--gap)))' },
+        },
+        'marquee-vertical': {
+          from: { transform: 'translateY(0)' },
+          to: { transform: 'translateY(calc(-100% - var(--gap)))' },
         },
       },
       backdropBlur: {

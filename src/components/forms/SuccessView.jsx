@@ -38,7 +38,7 @@ export default function SuccessView({ trackingId, onClose }) {
             className="p-2 hover:bg-sapa-accent/10 rounded-lg transition-colors"
             title="Salin"
           >
-            <Copy className="w-5 h-5 text-sapa-accent" />
+            <Copy width={20} height={20} className="text-sapa-accent" />
           </button>
         </div>
         {copied && (

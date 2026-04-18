@@ -97,7 +97,7 @@ export default function TrackingModal() {
             onClick={closeTrackingModal}
             className="p-2 rounded-lg hover:bg-sapa-highlight transition-colors text-sapa-secondary"
           >
-            <X size={20} />
+            <X width={20} height={20} />
           </button>
         </div>
 
@@ -111,9 +111,9 @@ export default function TrackingModal() {
           />
           <Button onClick={handleSearch} disabled={isSearching}>
             {isSearching ? (
-              <Loader2 className="w-4 h-4 animate-spin" />
+              <Loader2 width={16} height={16} className="animate-spin" />
             ) : (
-              <Search className="w-4 h-4" />
+              <Search width={16} height={16} />
             )}
           </Button>
         </div>
@@ -137,7 +137,8 @@ export default function TrackingModal() {
                     }`}
                   >
                     <StatusIcon
-                      className={`w-4 h-4 ${
+                      width={16} height={16}
+                      className={`${
                         result.status === 'Proses' ? 'animate-spin' : ''
                       }`}
                     />

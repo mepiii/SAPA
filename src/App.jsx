@@ -7,6 +7,7 @@ import TrackingModal from './components/forms/TrackingModal';
 import Beranda from './pages/Beranda';
 import TentangKami from './pages/TentangKami';
 import Lapor from './pages/Lapor';
+import { Toaster } from 'sonner';
 
 function App() {
   return (
@@ -35,6 +36,8 @@ function App() {
 
           {/* Tracking Modal (Global) */}
           <TrackingModal />
+
+          <Toaster position="bottom-right" />
 
           {/* Footer */}
           <footer className="py-8 px-4 text-center border-t border-sapa-secondary/10 mt-16">

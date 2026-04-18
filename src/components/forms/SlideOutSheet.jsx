@@ -79,7 +79,7 @@ export default function SlideOutSheet() {
             onClick={closeSheet}
             className="p-2 rounded-lg hover:bg-sapa-highlight transition-colors text-sapa-secondary hover:text-sapa-primary"
           >
-            <X size={20} />
+            <X width={20} height={20} />
           </button>
         </div>
 

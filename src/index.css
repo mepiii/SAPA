@@ -2,16 +2,80 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Request - Display Font */
+@font-face {
+  font-family: 'Request';
+  src: url('/fonts/request/Request Personal Use Only.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Campton - Body Font */
+@font-face {
+  font-family: 'Campton';
+  src: url('/fonts/campton/CamptonBook.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Campton';
+  src: url('/fonts/campton/CamptonBookItalic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Campton';
+  src: url('/fonts/campton/CamptonMedium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Campton';
+  src: url('/fonts/campton/CamptonMediumItalic.otf') format('opentype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Campton';
+  src: url('/fonts/campton/CamptonSemiBold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Campton';
+  src: url('/fonts/campton/CamptonBold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   html {
-    font-family: 'Plus Jakarta Sans', Inter, system-ui, sans-serif;
+    font-family: 'Campton', 'Plus Jakarta Sans', Inter, system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   body {
     @apply bg-sapa-canvas text-sapa-primary;
-    background: linear-gradient(180deg, #fafafa 0%, #f5f5f5 50%, #fafafa 100%);
+    background: #F5F5F7;
+  }
+
+  /* Dark mode */
+  .dark body,
+  .dark {
+    background: #09090B;
   }
 }
 
@@ -20,8 +84,16 @@
     @apply bg-white/70 backdrop-blur-md border border-white/50 shadow-lg shadow-black/5;
   }
 
+  .dark .glass {
+    @apply bg-white/10 backdrop-blur-md border border-white/10;
+  }
+
   .glass-strong {
     @apply bg-white/80 backdrop-blur-lg border border-white/60 shadow-xl shadow-black/5;
+  }
+
+  .dark .glass-strong {
+    @apply bg-white/15 backdrop-blur-lg border border-white/15;
   }
 
   .grid-pattern {
