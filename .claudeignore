@@ -1,7 +1,0 @@
-# .claudeignore
-node_modules/
-dist/
-build/
-.git/
-*.log
-.env
