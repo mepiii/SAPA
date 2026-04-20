@@ -1,39 +1,91 @@
-# SAPA (Sentra Aspirasi Pengaduan Asa)
+# SAPA - Sentra Aspirasi Pengaduan Asa
 
-SAPA adalah sistem informasi pengaduan yang dikembangkan khusus untuk mahasiswa Fakultas Ilmu Komputer (Fasilkom) Universitas Sriwijaya.
+Platform aspirasi dan pengaduan mahasiswa BEM Fasilkom Unsri. Laporkan aspirasi, kritik, dan saran dengan pelacakan transparan.
 
-## Fungsi
-Platform ini diinisiasi oleh BEM Fasilkom (Kabinet Arka Satyawira) sebagai wadah resmi bagi mahasiswa untuk menyampaikan keluhan, saran, maupun aspirasi terkait lingkungan kampus. Mahasiswa dapat mengirimkan laporan secara anonim untuk menjaga privasi, serta memantau status laporan (Menunggu, Diproses, Selesai) menggunakan Nomor Resi tanpa perlu membuat akun pengguna.
+## Quick Start
+
+```bash
+# Install deps
+npm install
+
+# Dev server
+npm run dev
+
+# Build production
+npm run build
+```
+
+## Routes
+
+| Path | Page | Description |
+|------|------|------------|
+| `/` | Beranda | Home dengan alur pelaporan |
+| `/tentang-kami` | Tentang Kami | Info platform |
+| `/lapor` | Lapor | Pilih kategori & kirim laporan |
 
 ## Tech Stack
-Proyek ini dibangun menggunakan teknologi berikut:
 
-**Frontend (Antarmuka Pengguna):**
-- **React.js & Vite**: Untuk membangun antarmuka web dengan performa yang cepat.
-- **Tailwind CSS**: Framework untuk merancang tata letak dan desain visual yang efisien.
-- **Framer Motion**: Untuk memberikan transisi dan animasi antarmuka yang halus.
-- **Lucide React**: Untuk penyediaan ikon vektor pada sistem.
+- **Framework**: Vite + React 18
+- **Styling**: Tailwind CSS + Framer Motion
+- **Icons**: Lucide React
+- **State**: React Context
+- **SEO**: react-helmet-async
 
-## Fitur Utama
-- **Kategori Laporan Spesifik**: Menyediakan formulir khusus untuk Kinerja Dosen, Kebijakan Kampus, Kerusakan Fasilitas, Aspirasi Ormawa, dan Pengajuan Seminar.
-- **Pelaporan Anonim**: Opsi untuk menyembunyikan identitas pelapor guna menjamin keamanan dan privasi.
-- **Pelacakan Status Laporan**: Fasilitas untuk mengecek perkembangan laporan secara langsung menggunakan Nomor Resi.
-- **Antarmuka Modern**: Desain minimalis yang mudah digunakan, dilengkapi dengan interaksi komponen yang mulus.
+## Categories (6)
 
-## Struktur
-Berikut adalah struktur folder utama pada proyek ini:
+1. Kinerja Dosen
+2. Kebijakan Kampus
+3. Kerusakan Fasilitas
+4. Aspirasi Ormawa
+5. Pengajuan Seminar
+6. Pelayanan Umum
 
-- `src/` : Direktori kode sumber utama aplikasi.
-  - `src/components/ui/` : Kumpulan komponen antarmuka (tombol, formulir) yang dapat digunakan kembali.
-- `public/` : Direktori untuk aset statis seperti logo BEM dan ikon.
-- `dist/` : Direktori hasil *build* yang siap untuk dipublikasikan (*deployment*).
-- `index.html` : Berkas utama untuk memuat aplikasi web.
-- `vite.config.js` : Berkas konfigurasi untuk lingkungan Vite.
-- `tailwind.config.js` : Berkas konfigurasi untuk penyesuaian desain Tailwind CSS.
-- `package.json` : Daftar pustaka (*library*) dan perintah pendukung proyek.
+## Features
 
-## Cara Menjalankan Secara Lokal
-1. Salin (*clone*) repositori ini ke komputer Anda.
-2. Buka terminal pada direktori proyek, lalu jalankan perintah `npm install` untuk mengunduh semua dependensi yang dibutuhkan.
-3. Jalankan perintah `npm run dev` untuk memulai server pengembangan lokal.
-4. Buka tautan `http://localhost:5173` pada peramban (*browser*) Anda untuk melihat aplikasi.
+- Form pelaporan per kategori
+- Tracking ID (`SAPA-XXXX`) untuk pantau status
+- Toggle anonim opsional
+- Responsive design (mobile-first)
+- Aksesibilitas: keyboard nav, focus trap, ARIA, skip link
+- SEO: meta tags, OG, Twitter Cards, JSON-LD schema
+
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── forms/           # Form modals & inputs
+│   │   └── forms/       # Category forms
+│   ├── layout/         # Nav, footer
+│   ├── sections/        # Hero, etc
+│   └── ui/             # Button, Input, etc
+├── context/            # SheetContext
+├── hooks/             # useFocusTrap, useEscapeKey
+├── pages/             # Beranda, TentangKami, Lapor
+└── index.css         # Tailwind + reduced-motion
+```
+
+## Commands
+
+```bash
+npm run dev      # Dev server
+npm run build   # Production build
+npm run preview # Preview production
+```
+
+## Recent Changes
+
+- Aksesibilitas: dialog ARIA, focus trap, keyboard nav, form label association
+- SEO: per-page title/description, OG tags, JSON-LD schema, skip link
+- Performa: manual chunks, prefer-reduced-motion, accessible Suspense fallback
+
+## Design System
+
+| Token | Value |
+|-------|-------|
+| `sapa.primary` | #300B55 |
+| `sapa.accent` | #7A47A6 |
+| `sapa.secondary` | #736F6F |
+| `sapa.canvas` | #F5F5F7 |
+
+Font: Plus Jakarta Sans
