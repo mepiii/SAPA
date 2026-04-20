@@ -88,4 +88,5 @@ npm run preview # Preview production
 | `sapa.secondary` | #736F6F |
 | `sapa.canvas` | #F5F5F7 |
 
-Font: Plus Jakarta Sans
+Font: 1. Request
+      2. Campton
