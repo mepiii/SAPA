@@ -12,7 +12,7 @@ export default {
           canvas: '#F5F5F7',
           surface: '#FFFFFF',
           primary: '#300B55',
-          secondary: '#A7A3A3',
+          secondary: '#736F6F',
           accent: '#7A47A6',
           accentDark: '#5A3282',
           warning: '#FFC148',
@@ -71,9 +71,13 @@ export default {
       backdropBlur: {
         xs: '2px',
       },
+      dropShadow: {
+        'heading': '0 2px 4px rgba(48, 11, 85, 0.15)',
+      },
       boxShadow: {
         'glow': '0 0 20px rgba(122, 71, 166, 0.3)',
         'glow-lg': '0 0 40px rgba(122, 71, 166, 0.4)',
+        'cinematic': '0 30px 60px rgba(48, 11, 85, 0.12)',
       },
     },
   },

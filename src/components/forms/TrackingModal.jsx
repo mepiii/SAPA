@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { X, Search, Clock, CheckCircle, Loader2 } from 'lucide-react';
 import { useSheet } from '../../context/SheetContext';
 import { Button } from '../ui/Button';
 import { Input } from '../ui/Input';
+import useEscapeKey from '../../hooks/useEscapeKey';
+import useFocusTrap from '../../hooks/useFocusTrap';
 
 const mockStatus = {
  'SAPA-A1B2': {
@@ -49,6 +51,17 @@ export default function TrackingModal() {
  const [result, setResult] = useState(null);
  const [error, setError] = useState('');
  const [isSearching, setIsSearching] = useState(false);
+ const containerRef = useFocusTrap(isTrackingModalOpen);
+ const titleId = 'tracking-modal-title';
+
+ useEffect(() => {
+ document.body.style.overflow = isTrackingModalOpen ? 'hidden' : 'unset';
+ return () => {
+ document.body.style.overflow = 'unset';
+ };
+ }, [isTrackingModalOpen]);
+
+ useEscapeKey(isTrackingModalOpen, closeTrackingModal);
 
  const handleSearch = async () => {
  if (!trackingId.trim()) {
@@ -60,7 +73,6 @@ export default function TrackingModal() {
  setError('');
  setResult(null);
 
- // Simulate API call
  await new Promise((resolve) => setTimeout(resolve, 800));
 
  const found = mockStatus[trackingId.toUpperCase()];
@@ -77,56 +89,54 @@ export default function TrackingModal() {
 
  return (
  <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
- {/* Backdrop */}
  <div
+ aria-hidden="true"
  className="absolute inset-0 bg-black/40 backdrop-blur-sm"
  onClick={closeTrackingModal}
  />
 
- {/* Modal */}
- <div className="relative w-full max-w-md bg-white/95 backdrop-blur-2xl border border-white/80 shadow-2xl rounded-3xl p-6 animate-fade-up">
- {/* Header */}
+ <div ref={containerRef} role="dialog" aria-modal="true" aria-labelledby={titleId} className="relative w-full max-w-md bg-white/95 backdrop-blur-2xl border border-white/80 shadow-2xl rounded-3xl p-6 animate-fade-up">
  <div className="flex items-center justify-between mb-6">
  <div>
- <h3 className="text-xl font-display font-bold text-sapa-primary dark:text-white/90">Cek Status Laporan</h3>
+ <h3 id={titleId} className="text-xl font-display font-bold text-sapa-primary dark:text-white/90">Cek Status Laporan</h3>
  <p className="text-sm font-body text-sapa-secondary dark:text-white/60 mt-1">
  Masukkan nomor resi untuk melacak laporan Anda
  </p>
  </div>
  <button
+ type="button"
  onClick={closeTrackingModal}
- className="p-2 rounded-lg hover:bg-sapa-highlight dark:hover:bg-white/10 transition-physical text-sapa-secondary dark:text-white/60 hover:text-sapa-primary dark:hover:text-white"
+ aria-label="Tutup"
+ className="p-2 rounded-lg hover:bg-sapa-highlight dark:hover:bg-white/10 transition-physical text-sapa-secondary dark:text-white/60 hover:text-sapa-primary dark:hover:text-white focus-visible:ring-2 focus-visible:ring-sapa-accent focus-visible:ring-offset-2"
  >
- <X width={20} height={20} />
+ <X aria-hidden="true" width={20} height={20} />
  </button>
  </div>
 
- {/* Search Input */}
  <div className="flex gap-2 mb-4 font-body">
  <Input
+ label="Nomor Resi"
  placeholder="Contoh: SAPA-A1B2"
  value={trackingId}
  onChange={(e) => setTrackingId(e.target.value)}
+ error={error}
  className="flex-1"
  />
- <Button onClick={handleSearch} disabled={isSearching} className="transition-physical hover:scale-105">
+ <Button onClick={handleSearch} disabled={isSearching} aria-label="Cari" className="self-end transition-physical hover:scale-105">
  {isSearching ? (
- <Loader2 width={16} height={16} className="animate-spin" />
+ <Loader2 aria-hidden="true" width={16} height={16} className="animate-spin" />
  ) : (
- <Search width={16} height={16} />
+ <Search aria-hidden="true" width={16} height={16} />
  )}
  </Button>
  </div>
 
- {/* Error */}
  {error && (
- <p className="text-sm font-body text-red-500 dark:text-red-400 mb-4">{error}</p>
+ <p role="alert" className="text-sm font-body text-red-500 dark:text-red-400 mb-4">{error}</p>
  )}
 
- {/* Result */}
  {result && (
- <div className="p-4 bg-gray-50 rounded-xl border border-gray-100 animate-fade-in">
- {/* Status Badge */}
+ <div aria-live="polite" className="p-4 bg-gray-50 rounded-xl border border-gray-100 animate-fade-in">
  <div className="flex items-center gap-2 mb-4">
  {(() => {
  const StatusIcon = statusConfig[result.status].icon;
@@ -137,6 +147,7 @@ export default function TrackingModal() {
  }`}
  >
  <StatusIcon
+ aria-hidden="true"
  width={16} height={16}
  className={`${
  result.status === 'Proses' ? 'animate-spin' : ''
@@ -148,26 +159,23 @@ export default function TrackingModal() {
  })()}
  </div>
 
- {/* Details */}
  <div className="space-y-2 text-sm font-body">
- <div className="flex justify-between">
+ <div className="flex justify-between gap-4">
  <span className="text-sapa-secondary dark:text-white/60">Kategori</span>
- <span className="font-medium text-sapa-primary dark:text-white/90">{result.category}</span>
+ <span className="font-medium text-right text-sapa-primary dark:text-white/90">{result.category}</span>
  </div>
- <div className="flex justify-between">
+ <div className="flex justify-between gap-4">
  <span className="text-sapa-secondary dark:text-white/60">Tanggal Kirim</span>
- <span className="font-medium text-sapa-primary dark:text-white/90">{result.submittedAt}</span>
+ <span className="font-medium text-right text-sapa-primary dark:text-white/90">{result.submittedAt}</span>
  </div>
  </div>
 
- {/* Message */}
  <p className="mt-4 text-sm font-body text-sapa-primary bg-white rounded-lg p-3 border border-gray-100">
  {result.message}
  </p>
  </div>
  )}
 
- {/* Demo Notice */}
  <p className="text-xs font-body text-sapa-secondary dark:text-white/40 mt-4 text-center">
  Demo: Coba dengan SAPA-A1B2, SAPA-X9Y8, atau SAPA-Z7W6
  </p>

@@ -1,7 +1,8 @@
+import React, { useMemo } from 'react';
 import { motion } from 'motion/react';
 import { cn } from '../../lib/utils';
 
-export function AnimatedHero({
+export const AnimatedHero = React.memo(function AnimatedHero({
   badge,
   title,
   titleAccent,
@@ -12,8 +13,8 @@ export function AnimatedHero({
   onSecondaryClick,
   className = '',
 }) {
-  const titleWords = title.split(' ');
-  const accentWords = titleAccent ? titleAccent.split(' ') : [];
+  const titleWords = useMemo(() => title.split(' '), [title]);
+  const accentWords = useMemo(() => titleAccent ? titleAccent.split(' ') : [], [titleAccent]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -32,7 +33,7 @@ export function AnimatedHero({
       opacity: 1,
       y: 0,
       filter: 'blur(0px)',
-      transition: { duration: 0.5, ease: 'easeOut' },
+      transition: { type: 'spring', stiffness: 100, damping: 20, mass: 1 },
     },
   };
 
@@ -41,7 +42,7 @@ export function AnimatedHero({
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: 'easeOut' },
+      transition: { type: 'spring', stiffness: 100, damping: 20, mass: 1 },
     },
   };
 
@@ -71,7 +72,7 @@ export function AnimatedHero({
 
         {/* Headline with staggered words */}
         <motion.h1
-          className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-[#300B55] tracking-tight leading-[1.1] mb-6"
+          className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-[#300B55] drop-shadow-heading tracking-tight leading-[1.1] mb-6"
           variants={containerVariants}
         >
           {titleWords.map((word, i) => (
@@ -79,6 +80,7 @@ export function AnimatedHero({
               key={i}
               variants={wordVariants}
               className="inline-block mr-2 md:mr-3"
+              whileHover={{ scale: 1.15, y: -5, rotate: -3, color: '#7A47A6' }}
             >
               {word}
             </motion.span>
@@ -94,6 +96,7 @@ export function AnimatedHero({
                   key={`accent-${i}`}
                   variants={wordVariants}
                   className="inline-block mr-2 md:mr-3"
+              whileHover={{ scale: 1.15, y: -5, rotate: -3, color: '#7A47A6' }}
                 >
                   {word}
                 </motion.span>
@@ -121,7 +124,7 @@ export function AnimatedHero({
             {primaryCTA && (
               <motion.button
                 onClick={onPrimaryClick}
-                className="px-8 py-4 bg-sapa-accent text-white font-display font-semibold rounded-full hover:bg-sapa-primary transition-all duration-300 shadow-[0_10px_30px_rgba(122,71,166,0.3)] hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(122,71,166,0.4)]"
+                className="px-8 py-4 bg-sapa-accent text-white font-display font-semibold rounded-full hover:bg-sapa-primary transition-all duration-300 shadow-[0_10px_30px_rgba(122,71,166,0.3)] hover:-translate-y-2 hover:shadow-cinematic hover:scale-[1.03] active:scale-95 transition-all duration-300 ease-out"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
@@ -131,7 +134,7 @@ export function AnimatedHero({
             {secondaryCTA && (
               <motion.button
                 onClick={onSecondaryClick}
-                className="px-8 py-4 border border-white/50 bg-white/70 backdrop-blur-xl text-sapa-primary font-display font-medium rounded-full hover:bg-sapa-highlight transition-physical shadow-[0_10px_30px_rgba(0,0,0,0.05)]"
+                className="px-8 py-4 border border-white/50 bg-white/70 backdrop-blur-xl text-sapa-primary font-display font-medium rounded-full hover:bg-sapa-highlight transition-all duration-300 ease-out shadow-cinematic hover:scale-[1.03] active:scale-95"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
@@ -155,6 +158,6 @@ export function AnimatedHero({
       </motion.div>
     </section>
   );
-}
+});
 
 export default AnimatedHero;

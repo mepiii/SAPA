@@ -12,7 +12,8 @@ export default function KinerjaDosenForm() {
     jurusanDosen: '',
     mataKuliahDosen: '',
     isiAspirasi: '',
-    isAnonymous: true,
+    isAnonymous: false,
+    namaLengkap: '',
   });
 
   const handleChange = (field, value) => {
@@ -29,6 +30,15 @@ export default function KinerjaDosenForm() {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      {!formData.isAnonymous && (
+        <Input
+          label="Nama Lengkap"
+          placeholder="Masukkan nama lengkap Anda"
+          value={formData.namaLengkap}
+          onChange={(e) => handleChange('namaLengkap', e.target.value)}
+          required={!formData.isAnonymous}
+        />
+      )}
       <Input
         label="Subjek Aspirasi"
         placeholder="Masukkan subjek aspirasi"

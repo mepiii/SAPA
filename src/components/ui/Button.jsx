@@ -3,6 +3,7 @@ export function Button({
   variant = 'primary',
   size = 'md',
   className = '',
+  type = 'button',
   ...props
 }) {
   const variants = {
@@ -20,7 +21,8 @@ export function Button({
 
   return (
     <button
-      className={`inline-flex items-center justify-center gap-2 font-medium rounded-lg transition-all duration-200 hover:scale-[1.02] active:scale-95 hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed ${variants[variant]} ${sizes[size]} ${className}`}
+      type={type}
+      className={`inline-flex items-center justify-center gap-2 font-medium rounded-lg transition-all duration-200 hover:scale-[1.02] active:scale-95 hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-sapa-accent focus-visible:ring-offset-2 ${variants[variant]} ${sizes[size]} ${className}`}
       {...props}
     >
       {children}

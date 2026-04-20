@@ -1,24 +1,39 @@
+import { useId } from 'react';
+
 export function Input({
   label,
   error,
   className = '',
+  id: providedId,
+  required,
   ...props
 }) {
+  const generatedId = useId();
+  const id = providedId ?? generatedId;
+  const errorId = error ? `${id}-error` : undefined;
+
   return (
     <div className={`flex flex-col gap-1.5 ${className}`}>
       {label && (
-        <label className="text-sm font-medium text-sapa-primary">
+        <label htmlFor={id} className="text-sm font-medium text-sapa-primary">
           {label}
+          {required ? <span aria-hidden="true"> *</span> : null}
         </label>
       )}
       <input
+        id={id}
+        required={required}
+        aria-invalid={Boolean(error)}
+        aria-describedby={errorId}
         className={`px-4 py-2.5 rounded-xl border bg-[#F9F9FB] text-sapa-primary placeholder:text-sapa-secondary/60 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-sapa-accent/30 focus:border-sapa-accent ${
           error ? 'border-red-400' : 'border-gray-200'
         }`}
         {...props}
       />
       {error && (
-        <span className="text-xs text-red-500">{error}</span>
+        <span id={errorId} className="text-xs text-red-500">
+          {error}
+        </span>
       )}
     </div>
   );
@@ -29,24 +44,37 @@ export function Textarea({
   error,
   className = '',
   rows = 4,
+  id: providedId,
+  required,
   ...props
 }) {
+  const generatedId = useId();
+  const id = providedId ?? generatedId;
+  const errorId = error ? `${id}-error` : undefined;
+
   return (
     <div className={`flex flex-col gap-1.5 ${className}`}>
       {label && (
-        <label className="text-sm font-medium text-sapa-primary">
+        <label htmlFor={id} className="text-sm font-medium text-sapa-primary">
           {label}
+          {required ? <span aria-hidden="true"> *</span> : null}
         </label>
       )}
       <textarea
+        id={id}
         rows={rows}
+        required={required}
+        aria-invalid={Boolean(error)}
+        aria-describedby={errorId}
         className={`px-4 py-2.5 rounded-xl border bg-[#F9F9FB] text-sapa-primary placeholder:text-sapa-secondary/60 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-sapa-accent/30 focus:border-sapa-accent resize-none ${
           error ? 'border-red-400' : 'border-gray-200'
         }`}
         {...props}
       />
       {error && (
-        <span className="text-xs text-red-500">{error}</span>
+        <span id={errorId} className="text-xs text-red-500">
+          {error}
+        </span>
       )}
     </div>
   );
@@ -57,17 +85,22 @@ export function FileInput({
   accept,
   className = '',
   onChange,
+  id: providedId,
   ...props
 }) {
+  const generatedId = useId();
+  const id = providedId ?? generatedId;
+
   return (
     <div className={`flex flex-col gap-1.5 ${className}`}>
       {label && (
-        <label className="text-sm font-medium text-sapa-primary">
+        <label htmlFor={id} className="text-sm font-medium text-sapa-primary">
           {label}
         </label>
       )}
-      <label className="flex items-center justify-center gap-2 px-4 py-4 rounded-xl border-2 border-dashed border-gray-200 bg-[#F9F9FB] cursor-pointer hover:border-sapa-accent/50 hover:bg-[#F0F0F5] transition-all duration-200">
+      <label htmlFor={id} className="flex items-center justify-center gap-2 px-4 py-4 rounded-xl border-2 border-dashed border-gray-200 bg-[#F9F9FB] cursor-pointer hover:border-sapa-accent/50 hover:bg-[#F0F0F5] transition-all duration-200">
         <svg
+          aria-hidden="true"
           className="w-5 h-5 text-sapa-secondary"
           fill="none"
           viewBox="0 0 24 24"
@@ -82,10 +115,11 @@ export function FileInput({
         </svg>
         <span className="text-sm text-sapa-secondary">Klik untuk upload file</span>
         <input
+          id={id}
           type="file"
           accept={accept}
           onChange={onChange}
-          className="hidden"
+          className="sr-only"
           {...props}
         />
       </label>
@@ -107,13 +141,17 @@ export function Toggle({
           checked={checked}
           onChange={(e) => onChange(e.target.checked)}
           className="sr-only"
+          role="switch"
+          aria-checked={checked}
         />
         <div
+          aria-hidden="true"
           className={`w-11 h-6 rounded-full transition-colors duration-200 ${
             checked ? 'bg-sapa-accent' : 'bg-gray-200'
           }`}
         />
         <div
+          aria-hidden="true"
           className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow-sm transition-transform duration-200 ${
             checked ? 'translate-x-5' : 'translate-x-0'
           }`}

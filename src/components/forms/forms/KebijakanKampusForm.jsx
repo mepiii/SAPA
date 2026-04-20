@@ -11,7 +11,8 @@ export default function KebijakanKampusForm() {
     namaKebijakan: '',
     isiAspirasi: '',
     dataPendukung: null,
-    isAnonymous: true,
+    isAnonymous: false,
+    namaLengkap: '',
   });
 
   const handleChange = (field, value) => {
@@ -32,6 +33,15 @@ export default function KebijakanKampusForm() {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      {!formData.isAnonymous && (
+        <Input
+          label="Nama Lengkap"
+          placeholder="Masukkan nama lengkap Anda"
+          value={formData.namaLengkap}
+          onChange={(e) => handleChange('namaLengkap', e.target.value)}
+          required={!formData.isAnonymous}
+        />
+      )}
       <Input
         label="Judul Aspirasi"
         placeholder="Masukkan judul aspirasi"
